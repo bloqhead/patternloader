@@ -1,0 +1,47 @@
+#patternLib {
+	position: relative;
+	padding: 0;
+	margin: 0;
+}
+
+#patternContainer {
+	max-width: 1140px;
+	margin: 0 auto;
+	padding: 6em 0 0 0;
+}
+
+#patternContainer > header {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	background: #eee;
+	padding: 20px;
+	font: normal 16px/1.3 "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #999;
+}
+
+#patternContainer > header h1 {
+	font-size: inherit;
+	font-weight: inherit;
+	margin: 0;
+}
+
+#patternContainer > header a {
+	color: blue;
+}
+
+.patternItem {
+	margin: 1em 0;
+	padding: 1em 0;
+	overflow: hidden;
+	border-bottom: 1px solid #ccc;
+}
+
+.patternItem:first-of-type {
+	margin-top: 0;
+}
+
+.patternItem:last-of-type {
+	margin-bottom: 0;
+}
