@@ -43,6 +43,10 @@
 	float: left;
 }
 
+.patternWrap pre {
+	border-radius: 3px;
+}
+
 .patternItem pre code {
 	overflow: hidden;
 }
