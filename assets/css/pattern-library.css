@@ -31,6 +31,22 @@
 	color: blue;
 }
 
+.patternWrap {
+	overflow: hidden;
+}
+
+.patternItem,
+.patternWrap pre {
+	width: 50%;
+	overflow: hidden;
+	display: block;
+	float: left;
+}
+
+.patternItem pre code {
+	overflow: hidden;
+}
+
 .patternItem {
 	margin: 1em 0;
 	padding: 1em 0;

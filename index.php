@@ -5,7 +5,9 @@
 		<meta name="description" content="A design pattern library experiment.">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Pattern Library</title>
-		<link rel="stylesheet" href="pattern-library.css">
+		<link rel="stylesheet" href="assets/css/highlight-mono-blue.css">
+		<link rel="stylesheet" href="assets/css/pattern-library.css">
+		<script type="text/javascript" src="assets/js/highlight.pack.js"></script>
 		<!-- Add your custom stylesheet below -->
 		<!-- <link rel="stylesheet" href="assets/css/style.css"> -->
 	</head>
@@ -33,14 +35,23 @@
 			/**
 			 * Pattern Loader
 			 */
-			foreach ( glob( 'patterns/*.html' ) as $filename ) {
-				echo '<div class="patternItem">';
-				include $filename;
-				echo '</div>';
-			}
-			?>
+			foreach ( glob( 'patterns/*.html' ) as $filename ) { ?>
+				<div class="patternWrap">
+					<div class="patternItem">
+						<?php include $filename; ?>
+					</div>
+					<pre><code><?php echo htmlspecialchars( file_get_contents( $filename ) ); ?></code></pre>
+				</div>
+			<?php } ?>
 
 		</div>
 
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+		<script type="text/javascript">
+		$(document).ready(function() {
+			$('pre code').each(function(i, e) {hljs.highlightBlock(e)});
+		});
+		</script>
 	</body>
 </html>
