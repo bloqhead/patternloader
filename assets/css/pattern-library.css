@@ -1,3 +1,8 @@
+#patternContainer,
+#patternContainer > header h1 {
+	max-width: 1600px;
+}
+
 #patternLib {
 	position: relative;
 	padding: 0;
@@ -5,7 +10,6 @@
 }
 
 #patternContainer {
-	max-width: 1140px;
 	margin: 0 auto;
 	padding: 6em 0 0 0;
 }
@@ -22,46 +26,80 @@
 }
 
 #patternContainer > header h1 {
+	display: block;
 	font-size: inherit;
 	font-weight: inherit;
-	margin: 0;
+	margin: 0 auto;
 }
 
 #patternContainer > header a {
 	color: blue;
 }
 
-.patternWrap {
-	overflow: hidden;
-}
-
 .patternItem,
 .patternWrap pre {
-	width: 50%;
 	overflow: hidden;
 	display: block;
+}
+
+.patternWrap {
+	overflow: hidden;
+	margin: 2em 0;
+}
+
+.patternWrap:first-of-type {
+	margin-top: 0;
+}
+
+.patternWrap:last-of-type {
+	margin-bottom: 0;
+}
+
+.patternWrap > header {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 10px;
+	background: #eaeef3;
+	color: #999;
+	padding: 3px 6px;
+	border-radius: 3px;
+}
+
+.patternWrap > header h2 {
+	margin: 0;
+	padding: 0;
+	font-weight: normal;
+}
+
+.patternItem {
+	width: 60%;
 	float: left;
 }
 
 .patternWrap pre {
+	width: 38%;
+	float: right;
 	border-radius: 3px;
 }
 
 .patternItem pre code {
-	overflow: hidden;
+
 }
 
 .patternItem {
-	margin: 1em 0;
-	padding: 1em 0;
 	overflow: hidden;
-	border-bottom: 1px solid #ccc;
 }
 
-.patternItem:first-of-type {
-	margin-top: 0;
+@media screen and (max-width: 1600px) {
+	#patternContainer {
+		padding-left: 1.5em;
+		padding-right: 1.5em;
+	}
 }
 
-.patternItem:last-of-type {
-	margin-bottom: 0;
+@media screen and (max-width: 1023px) {
+	.patternItem,
+	.patternWrap pre {
+		width: 100%;
+		float: none;
+	}
 }

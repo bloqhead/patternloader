@@ -5,12 +5,15 @@
 		<meta name="description" content="A design pattern library experiment.">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>Design Pattern Library Autoloader</title>
+		<title>Design Pattern Loader</title>
 
-		<link rel="stylesheet" href="assets/css/highlight-mono-blue.css">
+		<!-- Highlight.js theme -->
+		<link rel="stylesheet" href="assets/css/highlight/monoblue.css">
+
+		<!-- Pattern Library Loader base theme - DON'T REMOVE THIS! -->
 		<link rel="stylesheet" href="assets/css/pattern-library.css">
 
-		<!-- Add your custom stylesheet below -->
+		<!-- Add your custom stylesheet(s) below -->
 		<!-- <link rel="stylesheet" href="assets/css/custom/style.css"> -->
 
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -22,6 +25,10 @@
 		<?php
 		/**
 		 * Project Info
+		 *
+		 * Change this based on your project details.
+		 * This is a cosmetic thing to customize on
+		 * a per-project basis.
 		 */
 		$json = json_decode( file_get_contents( 'project.json' ), true );
 		?>
@@ -40,9 +47,16 @@
 			<?php
 			/**
 			 * Pattern Loader
+			 *
+			 * This will automatically load in any
+			 * patterns that are dumped into the
+			 * /patterns/ directory.
 			 */
 			foreach ( glob( 'patterns/*.html' ) as $filename ) { ?>
 				<div class="patternWrap">
+					<header>
+						<h2><code><?php echo str_replace( 'patterns/', '', $filename ); ?></code></h2>
+					</header>
 					<div class="patternItem">
 						<?php include $filename; ?>
 					</div>
@@ -54,8 +68,13 @@
 
 		<script type="text/javascript">
 		$( function() {
-			$('pre code').each( function( i, e ) { hljs.highlightBlock(e) } );
+			$('pre code').each(
+				function( i, e ) {
+					hljs.highlightBlock(e)
+				}
+			);
 		});
 		</script>
+
 	</body>
 </html>
