@@ -1,6 +1,10 @@
 #patternContainer,
-#patternContainer > header h1 {
+#patternContainer > header .inner {
 	max-width: 1600px;
+}
+
+#patternContainer > header .inner {
+	overflow: hidden;
 }
 
 #patternLib {
@@ -15,7 +19,7 @@
 }
 
 #patternContainer > header {
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 	right: 0;
@@ -25,15 +29,34 @@
 	color: #999;
 }
 
+#patternContainer > header h1,
+#patternContainer > header .controls {
+	width: 48%;
+	overflow: hidden;
+}
+
 #patternContainer > header h1 {
-	display: block;
+	float: left;
 	font-size: inherit;
 	font-weight: inherit;
-	margin: 0 auto;
+	margin: 0;
+	padding: 0;
 }
 
 #patternContainer > header a {
 	color: blue;
+	text-decoration: none;
+}
+
+#patternContainer > header .controls {
+	float: right;
+	text-align: right;
+}
+
+#patternContainer > header .controls a {
+	font-weight: bold;
+	text-decoration: underline;
+	cursor: pointer;
 }
 
 .patternItem,
@@ -75,14 +98,27 @@
 	float: left;
 }
 
+.patternItem.fullWidth {
+	width: 100%;
+}
+
+.patternItem,
+.patternWrap pre {
+	-webkit-transition: 0.2s all ease-in-out;
+	   -moz-transition: 0.2s all ease-in-out;
+	        transition: 0.2s all ease-in-out;
+}
+
 .patternWrap pre {
 	width: 38%;
 	float: right;
 	border-radius: 3px;
+	opacity: 1;
 }
 
-.patternItem pre code {
-
+.patternWrap pre.inactive {
+	display: none;
+	opacity: 0;
 }
 
 .patternItem {
@@ -101,5 +137,11 @@
 	.patternWrap pre {
 		width: 100%;
 		float: none;
+	}
+
+	#patternContainer > header h1,
+	#patternContainer > header .controls {
+		width: 100%;
+		text-align: left;
 	}
 }

@@ -36,12 +36,17 @@
 		<div id="patternContainer">
 
 			<header>
-				<h1>
-					<?php if( !empty( $json['name'] ) ) { echo $json['name']; }; ?> Pattern Library
-					<?php if( !empty( $json['website'] ) ) : ?>
-						&mdash; <a href="<?php echo $json['website']; ?>">View website</a>
-					<?php endif; ?>
-				</h1>
+				<div class="inner">
+					<h1>
+						<?php if( !empty( $json['name'] ) ) { echo $json['name']; }; ?> Pattern Library
+						<?php if( !empty( $json['website'] ) ) : ?>
+							&mdash; <a href="<?php echo $json['website']; ?>">View website</a>
+						<?php endif; ?>
+					</h1>
+					<div class="controls">
+						<a class="toggle-raw">Toggle Raw</a>
+					</div>
+				</div>
 			</header>
 
 			<?php
@@ -68,11 +73,24 @@
 
 		<script type="text/javascript">
 		$( function() {
+			/**
+			 * Highlight.js
+			 */
 			$('pre code').each(
 				function( i, e ) {
 					hljs.highlightBlock(e)
 				}
 			);
+
+			/**
+			 * Raw toggler
+			 */
+			$('.controls .toggle-raw').on( 'click', function() {
+				$('.patternWrap').each( function() {
+					$(this).find('pre').toggleClass('inactive');
+					$(this).find('.patternItem').toggleClass('fullWidth');
+				});
+			});
 		});
 		</script>
 
