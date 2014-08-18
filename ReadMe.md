@@ -1,5 +1,5 @@
 # Design Pattern Library Loader
-A simple PHP-based pattern library loader.
+A simple PHP-drive pattern library loader.
 
 ## Getting Started
 1. Rename the parameters in the `project.json` file to match your project
