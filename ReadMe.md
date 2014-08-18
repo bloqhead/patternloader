@@ -7,8 +7,3 @@ A simple PHP-based pattern library loader.
 3. Open the root `index.php` file in your web browser to view your automatically-loaded design patterns
 4. ?????
 5. **PROFIT!**
-
-### TODO
-* Add Sass globbing
-* Add something to `Gruntfile.js`
-* Add something to `package.json`
