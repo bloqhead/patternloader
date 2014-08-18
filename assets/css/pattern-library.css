@@ -54,7 +54,6 @@
 }
 
 #patternContainer > header .controls a {
-	font-weight: bold;
 	text-decoration: underline;
 	cursor: pointer;
 }
@@ -117,8 +116,7 @@
 }
 
 .patternWrap pre.inactive {
-	display: none;
-	opacity: 0;
+	width: 0;
 }
 
 .patternItem {

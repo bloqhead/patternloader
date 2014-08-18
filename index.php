@@ -38,7 +38,7 @@
 			<header>
 				<div class="inner">
 					<h1>
-						<?php if( !empty( $json['name'] ) ) { echo $json['name']; }; ?> Pattern Library
+						Pattern Library<?php if( !empty( $json['name'] ) ) { echo ' for ' . $json['name']; }; ?>
 						<?php if( !empty( $json['website'] ) ) : ?>
 							&mdash; <a href="<?php echo $json['website']; ?>">View website</a>
 						<?php endif; ?>
