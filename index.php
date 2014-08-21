@@ -10,11 +10,11 @@
 		<!-- Highlight.js theme -->
 		<link rel="stylesheet" href="assets/css/highlight/monoblue.css">
 
+		<!-- Add your custom stylesheet(s) below -->
+		<!-- <link rel="stylesheet" href="assets/css/custom/your-styles-here.css"> -->
+
 		<!-- Pattern Library Loader base theme - DON'T REMOVE THIS! -->
 		<link rel="stylesheet" href="assets/css/pattern-library.css">
-
-		<!-- Add your custom stylesheet(s) below -->
-		<!-- <link rel="stylesheet" href="assets/css/custom/style.css"> -->
 
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script>window.jQuery || document.write('<script src="assets/js/jquery-1.10.2.min.js"><\/script>')</script>
@@ -57,10 +57,13 @@
 			 * patterns that are dumped into the
 			 * /patterns/ directory.
 			 */
-			foreach ( glob( 'patterns/*.html' ) as $filename ) { ?>
-				<div class="patternWrap">
+			foreach ( glob( 'patterns/*.html' ) as $filename ) {
+				$id = str_replace( 'patterns/', '', $filename );
+				$anchor = str_replace( '.html', '', strtolower( $id ) );
+				?>
+				<div class="patternWrap" id="<?php echo $anchor; ?>">
 					<header>
-						<h2><code><?php echo str_replace( 'patterns/', '', $filename ); ?></code></h2>
+						<h2><a href="<?php echo '#' . $anchor; ?>"><?php echo '#' . $anchor; ?></a> &mdash; <code><?php echo $id; ?></code></h2>
 					</header>
 					<div class="patternItem">
 						<?php include $filename; ?>
