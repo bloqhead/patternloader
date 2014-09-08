@@ -35,6 +35,8 @@
 
 		<div id="patternContainer">
 
+			<?php $patterns = glob( 'patterns/*.html' ); ?>
+
 			<header>
 				<div class="inner">
 					<h1>
@@ -44,7 +46,13 @@
 						<?php endif; ?>
 					</h1>
 					<div class="controls">
-						<a class="toggle-raw">Toggle Raw</a>
+						<select class="pattern-jump-nav">
+							<?php foreach ( $patterns as $filename ) : 
+								$anchor = str_replace( '.html', '', strtolower( str_replace( 'patterns/', '', $filename ) ) );
+							?>
+							<option value="<?= $anchor ?>"><?= $anchor ?></option>
+							<?php endforeach; ?>
+						</select>
 					</div>
 				</div>
 			</header>
@@ -57,18 +65,21 @@
 			 * patterns that are dumped into the
 			 * /patterns/ directory.
 			 */
-			foreach ( glob( 'patterns/*.html' ) as $filename ) {
+			foreach ( $patterns as $filename ) {
 				$id = str_replace( 'patterns/', '', $filename );
 				$anchor = str_replace( '.html', '', strtolower( $id ) );
 				?>
 				<div class="patternWrap" id="<?php echo $anchor; ?>">
 					<header>
+						<a class="show-code" href="#">Toggle Code</a>
 						<h2><a href="<?php echo '#' . $anchor; ?>"><?php echo '#' . $anchor; ?></a> &mdash; <code><?php echo $id; ?></code></h2>
 					</header>
+					<div class="codeDrawer">
+						<pre><code><?php echo htmlspecialchars( file_get_contents( $filename ) ); ?></code></pre>
+					</div>
 					<div class="patternItem">
 						<?php include $filename; ?>
 					</div>
-					<pre><code><?php echo htmlspecialchars( file_get_contents( $filename ) ); ?></code></pre>
 				</div>
 			<?php } ?>
 
@@ -88,12 +99,20 @@
 			/**
 			 * Raw toggler
 			 */
-			$('.controls .toggle-raw').on( 'click', function() {
-				$('.patternWrap').each( function() {
-					$(this).find('pre').toggleClass('inactive');
-					$(this).find('.patternItem').toggleClass('fullWidth');
-				});
+			$('.show-code').on( 'click', function(evt) {
+				$(this).parents('.patternWrap').find('.codeDrawer').toggleClass('is_open');
+				evt.stopPropagation();
+				return false;
 			});
+
+			/**
+			 * Pattern numb nav
+			 */
+			$('.pattern-jump-nav').on('change', function() {
+				var position = $('#' + $(this).val()).offset();
+				window.scroll(0, position.top);
+			});
+
 		});
 		</script>
 
