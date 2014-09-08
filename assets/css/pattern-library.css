@@ -32,12 +32,6 @@
 	color: #999;
 }
 
-#patternContainer > header h1,
-#patternContainer > header .controls {
-	width: 48%;
-	overflow: hidden;
-}
-
 #patternContainer > header h1 {
 	float: left;
 	font-family: inherit;
@@ -52,10 +46,15 @@
 	text-decoration: none;
 }
 
+#patternContainer > header h1 {
+	float: left;
+}
+
 #patternContainer > header .controls {
 	float: right;
 	text-align: right;
 }
+
 
 #patternContainer > header .controls a {
 	text-decoration: underline;
@@ -114,11 +113,9 @@
 }
 
 .patternWrap pre {
-	width: 38%;
-	float: right;
 	border-radius: 3px;
 	opacity: 1;
-	font-size: 14px;
+	font-size: 12px;
 }
 
 .patternWrap pre.inactive {
@@ -136,16 +133,25 @@
 	}
 }
 
-@media screen and (max-width: 1023px) {
-	.patternItem,
-	.patternWrap pre {
-		width: 100%;
-		float: none;
-	}
+.patternItem,
+.patternWrap pre {
+	width: 100%;
+	float: none;
+}
+#patternContainer > header h1,
+#patternContainer > header .controls {
+	text-align: left;
+}
 
-	#patternContainer > header h1,
-	#patternContainer > header .controls {
-		width: 100%;
-		text-align: left;
-	}
+.codeDrawer {
+	height: 0; 
+	overflow: hidden;
+}
+
+.codeDrawer.is_open {
+	height: auto;
+}
+
+.show-code {
+	float: right;
 }
