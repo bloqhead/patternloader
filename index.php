@@ -31,11 +31,11 @@
 		 * a per-project basis.
 		 */
 		$json = json_decode( file_get_contents( 'project.json' ), true );
+		$patterns = glob( 'patterns/*.html' );
 		?>
 
 		<div id="patternContainer">
 
-			<?php $patterns = glob( 'patterns/*.html' ); ?>
 
 			<header>
 				<div class="inner">
@@ -80,6 +80,17 @@
 					<div class="patternItem">
 						<?php include $filename; ?>
 					</div>
+
+					<?php 
+					$docfile = 'patterns/' . $anchor . '.txt';
+					if ( file_exists( $docfile ) ) {
+						$docs = file_get_contents( $docfile ); ?>
+					<div class="patternDocs">
+						<h3>Notes on this pattern:</h3>
+						<p><?= htmlspecialchars( $docs ); ?></p>
+					</div>
+					<?php } // docfile exists?>
+
 				</div>
 			<?php } ?>
 
