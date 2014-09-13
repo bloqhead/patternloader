@@ -1,4 +1,22 @@
-<!doctype html>
+<?php 
+function load_pattern($filename) {
+	$data = file($filename);
+	$regex = '/^<!-- @([a-zA-Z0-9-_]+)(\s(.+))? -->$/';
+
+	$vars = [];
+	for( $i = 0; $i < count( $data ); $i++ ) {
+		$result = preg_match_all( $regex, $data[$i], $matches );
+		if ($result > 0) {
+			$test = $vars[$matches[1][0]] = $matches[3][0];
+			if (empty($test)) $vars[$matches[1][0]] = true;
+			unset($data[$i]);
+		}
+	}
+	$data = implode('', $data);
+
+	return array( $data, $vars );
+}
+?><!doctype html>
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -66,6 +84,7 @@
 			 * /patterns/ directory.
 			 */
 			foreach ( $patterns as $filename ) {
+				list( $contents, $vars ) = load_pattern( $filename );
 				$id = str_replace( 'patterns/', '', $filename );
 				$anchor = str_replace( '.html', '', strtolower( $id ) );
 				?>
@@ -75,10 +94,10 @@
 						<h2><a href="<?php echo '#' . $anchor; ?>"><?php echo '#' . $anchor; ?></a> &mdash; <code><?php echo $id; ?></code></h2>
 					</header>
 					<div class="codeDrawer">
-						<pre><code><?php echo htmlspecialchars( file_get_contents( $filename ) ); ?></code></pre>
+						<pre><code><?php echo htmlspecialchars( $contents ); ?></code></pre>
 					</div>
 					<div class="patternItem">
-						<?php include $filename; ?>
+						<?php echo $contents; ?>
 					</div>
 
 					<?php 
