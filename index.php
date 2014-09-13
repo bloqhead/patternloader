@@ -82,6 +82,7 @@
 					</div>
 
 					<?php 
+					// load up the notes file for the pattern if it exists
 					$docfile = 'patterns/' . $anchor . '.txt';
 					if ( file_exists( $docfile ) ) {
 						$docs = file_get_contents( $docfile ); ?>
