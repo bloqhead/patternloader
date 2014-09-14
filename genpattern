@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+pattern=$1
+path_scss='assets/scss/patterns'
+path_coffee='assets/coffee'
+path_html='patterns'
+
+scss_file="${path_scss}/_${pattern}.scss"
+mkdir -p $path_scss
+echo "// ${scss_file}" >> $scss_file
+echo "created ${scss_file} ..."
+
+coffee_file="${path_coffee}/_${pattern}.coffee"
+mkdir -p $path_coffee
+echo "# ${coffee_file}" >> ${coffee_file}
+echo "created ${coffee_file} ..."
+
+html_file="${path_html}/${pattern}.html"
+mkdir -p $path_html
+echo "<!-- ${html_file} -->" >> $html_file
+echo "created ${html_file} ..."
+
+$EDITOR $html_file $scss_file
