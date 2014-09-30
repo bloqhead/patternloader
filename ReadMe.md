@@ -12,5 +12,7 @@ A simple PHP-driven pattern library loader.
 ## Credits
 Front-End Web Developer [Daryn St. Pierre](http://bigseadesign.com/team/daryn-st-pierre) and Lead Developer [James Sylvanus](http://bigseadesign.com/team/james-sylvanus) with [Big Sea Design](http://bigseadesign.com) in sunny St. Petersburg Florida.
 
+Read more about our pattern loader on the [Big Sea Blog](http://bigseadesign.com/web-design/following-patterns)!
+
 ### License
 See the [LICENSE](LICENSE) file.
