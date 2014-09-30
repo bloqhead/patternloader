@@ -14,5 +14,4 @@ Front-End Web Developer [Daryn St. Pierre](http://bigseadesign.com/team/daryn-st
 
 Read more about our pattern loader on the [Big Sea Blog](http://bigseadesign.com/web-design/following-patterns)!
 
-### License
-See the [LICENSE](LICENSE) file.
+[View the license](LICENSE).
