@@ -1,5 +1,5 @@
 # Design Pattern Library Loader
-A simple PHP-driven pattern library loader. Read about it on the [Big Sea Blog](http://bigseadesign.com/web-design/following-patterns).
+A simple PHP-driven design pattern library loader. Read about it on the [Big Sea Blog](http://bigseadesign.com/web-design/following-patterns).
 
 ## Getting Started
 1. Rename the parameters in the `project.json` file to match your project. This is optional but makes thing a little more presentable and personalized
