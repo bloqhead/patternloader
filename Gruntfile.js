@@ -17,24 +17,27 @@ module.exports = function(grunt) {
 				expand : true,
 				flatten : true,
 				cwd : 'assets/scss',
-				src : ['**/*.scss', '!**/_*.scss'],
-				dest : 'css/',
+				src : [
+					'**/*.scss',
+					'!**/_*.scss'
+				],
+				dest : 'assets/css/',
 				ext : '.css'
 			} ]
 		}
 	},
-	coffee : {
-		dist : {
-			files : [ {
-				expand : true,
-				flatten : true,
-				cwd : 'assets/coffee',
-				src : ['**/*.coffee'],
-				dest : 'js/',
-				ext : '.js'
-			} ]
-		}
-	},
+	// coffee : {
+	// 	dist : {
+	// 		files : [ {
+	// 			expand : true,
+	// 			flatten : true,
+	// 			cwd : 'assets/coffee',
+	// 			src : ['**/*.coffee'],
+	// 			dest : 'js/',
+	// 			ext : '.js'
+	// 		} ]
+	// 	}
+	// },
 	imagemin : {
 		dist : {
 			options : {
@@ -43,7 +46,7 @@ module.exports = function(grunt) {
 			files : [ {
 				expand : true,
 				flatten : true,
-				cwd : 'assets/images',
+				cwd : 'assets/img',
 				src : ['*.png', '*.jpg'],
 				dest : 'img/'
 			} ]
@@ -52,8 +55,14 @@ module.exports = function(grunt) {
     // Task configuration.
     watch: {
 		dist : {
-			files: ['assets/scss/**/*.scss','assets/coffee/**/*.coffee','assets/images/**/*.png','assets/images/**/*.jpg'],
-			tasks: ['sass','coffee','concat'],
+			files: [
+				'assets/scss/**/*.scss',
+				'assets/coffee/**/*.coffee',
+				'assets/img/**/*.png',
+				'assets/img/**/*.jpg'
+			],
+			// tasks: ['sass','coffee','concat'],
+			tasks: ['sass','concat'],
 			options: {
 				livereload: true
 			}
@@ -67,7 +76,9 @@ module.exports = function(grunt) {
     	dist : {
     		files : {
     			'assets/js/build.js' : [
-	    			'assets/js/main.js'
+	    			'assets/js/**/*',
+	    			'!assets/js/highlight.pack.js',
+	    			'!assets/js/jquery-1.10.2.min.js'
 	    		]
 	    	}
     	}
@@ -79,12 +90,13 @@ module.exports = function(grunt) {
     			'assets/js/build.min.js' : [ 'assets/js/build.js' ]
     		}
     	}
-    }, 
+    },
 
     cssmin : {
     	dist : {
     		files : {
     			'assets/css/style.min.css' : [ 'assets/css/style.css' ],
+    			'assets/css/pattern-library.min.css' : [ 'assets/css/pattern-library.css' ],
     			'assets/css/ie.min.css' : [ 'assets/css/ie.css' ]
     		}
     	}
@@ -97,11 +109,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-sass');
-  grunt.loadNpmTasks('grunt-contrib-coffee');
+  // grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
 
   // Default task.
-  grunt.registerTask('default', ['sass','coffee','imagemin']);
+  // grunt.registerTask('default', ['sass','coffee','imagemin']);
+  grunt.registerTask('default', ['sass','imagemin']);
   grunt.registerTask('build', ['default','concat','uglify','cssmin'])
 };

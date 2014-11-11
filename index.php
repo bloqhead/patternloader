@@ -1,4 +1,4 @@
-<?php 
+<?php
 function load_pattern($filename) {
 	$data = file($filename);
 	$regex = '/^<!-- @([a-zA-Z0-9-_]+)(\s(.+))? -->$/';
@@ -38,7 +38,7 @@ function load_pattern($filename) {
 		<script>window.jQuery || document.write('<script src="assets/js/jquery-1.10.2.min.js"><\/script>')</script>
 		<script type="text/javascript" src="assets/js/highlight.pack.js"></script>
 	</head>
-	<body id="patternLib">
+	<body id="patternLib" class="bigsea">
 
 		<?php
 		/**
@@ -65,7 +65,7 @@ function load_pattern($filename) {
 					</h1>
 					<div class="controls">
 						<select class="pattern-jump-nav">
-							<?php foreach ( $patterns as $filename ) : 
+							<?php foreach ( $patterns as $filename ) :
 								$anchor = str_replace( '.html', '', strtolower( str_replace( 'patterns/', '', $filename ) ) );
 							?>
 							<option value="<?= $anchor ?>"><?= $anchor ?></option>
@@ -100,7 +100,7 @@ function load_pattern($filename) {
 						<?php echo $contents; ?>
 					</div>
 
-					<?php 
+					<?php
 					// load up the notes file for the pattern if it exists
 					$docfile = 'patterns/' . $anchor . '.txt';
 					if ( file_exists( $docfile ) ) {

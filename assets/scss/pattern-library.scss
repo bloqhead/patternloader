@@ -1,0 +1,225 @@
+// Libraries
+@import 'bourbon/bourbon';
+@import 'neat/neat';
+@import 'http://fonts.googleapis.com/css?family=Nunito';
+
+// Colors
+$gallery: 			#eee;
+$celeste: 			#ccc;
+$mountain_mist: 	#999;
+$blue: 				blue;
+$athens_gray: 		#eaeef3;
+$wild_sand: 		#f5f5f5;
+$mercury: 			#e5e5e5;
+$minsk: 			#338;
+$tapa: 				#777;
+$white: 			#fff;
+$black: 			#000;
+
+$bsd_dark_teal: 	#288395;
+
+// Misc
+$max-width: 		1600px;
+
+%wrap {
+	overflow: hidden;
+	display: block;
+	width: 100%;
+	float: none;
+	@include transition(0.2s all ease-in-out);
+}
+
+@mixin breakpoint {
+	@include clearfix;
+	width: 100%;
+	text-align: center;
+	padding: 5px 0;
+}
+
+#patternContainer {
+	max-width: $max-width;
+	overflow: hidden;
+	margin: 0 auto;
+	padding: 6em 0;
+
+	> header {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 1000;
+		background: $gallery;
+		border-bottom: 1px solid $celeste;
+		padding: 10px;
+		font: normal 16px/1.3 "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+		color: $mountain_mist;
+
+		.inner {
+			max-width: $max-width;
+			overflow: hidden;
+		}
+
+		h1 {
+			font-family: inherit;
+			font-size: inherit;
+			font-weight: inherit;
+			margin: 0;
+			padding: 0;
+			float: left;
+			text-align: left;
+
+			@media screen and (max-width: 690px) {
+				@include breakpoint;
+			}
+		}
+
+		a {
+			color: $blue;
+			text-decoration: none;
+		}
+
+		.controls {
+			float: right;
+			text-align: right;
+			text-align: left;
+
+			a {
+				text-decoration: underline;
+				cursor: pointer;
+			}
+
+			@media screen and (max-width: 690px) {
+				@include breakpoint;
+
+				select {
+					display: block;
+					width: 100%;
+					@include box-sizing(border-box);
+				}
+			}
+		}
+	}
+}
+
+#patternLib {
+	position: relative;
+	padding: 0;
+	margin: 0;
+
+	// For Big Sea projects
+	&.bigsea {
+
+		#patternContainer {
+
+			> header {
+				background: $bsd_dark_teal;
+				font-family: "Nunito", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+				font-weight: normal;
+				color: $white;
+				border-bottom: 1px solid darken($bsd_dark_teal, 15);
+
+				a {
+					color: lighten($bsd_dark_teal, 25);
+
+					&:hover {
+						color: $white;
+					}
+				}
+			}
+		}
+	}
+}
+
+.patternItem {
+	@extend %wrap;
+	width: 60%;
+	float: left;
+	overflow: hidden;
+
+	&.fullWidth {
+		width: 100%;
+	}
+}
+
+.patternWrap {
+	overflow: hidden;
+	padding: 2em 0;
+
+	pre {
+		@extend %wrap;
+		border-radius: 3px;
+		opacity: 1;
+		font-size: 12px;
+
+		&.inactive {
+			width: 0;
+		}
+	}
+
+	&:first-of-type {
+		padding-top: 0;
+	}
+
+	&:last-of-type {
+		padding-bottom: 0;
+	}
+
+	> header {
+		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+		font-size: 10px;
+		background: $athens_gray;
+		color: $mountain_mist;
+		padding: 3px 6px;
+		margin: 0 0 1em 0;
+		border-radius: 3px;
+
+		h2 {
+			margin: 0;
+			padding: 0;
+			font-weight: normal;
+		}
+	}
+}
+
+@media screen and (max-width: $max-width) {
+	#patternContainer {
+		padding-left: 1.5em;
+		padding-right: 1.5em;
+	}
+}
+
+// code drawer
+.codeDrawer {
+	height: 0;
+	overflow: hidden;
+
+	&.is_open {
+		height: auto;
+	}
+}
+
+.show-code {
+	float: right;
+}
+
+.patternDocs {
+	padding: 20px;
+	background: $wild_sand;
+	font-family: sans-serif;
+	border-left: 5px solid $mercury;
+	overflow: hidden;
+
+	h3 {
+		color: $minsk;
+		text-transform: uppercase;
+		font-size: 0.7em;
+		margin-top: 0;
+	}
+
+	p {
+		white-space: pre-wrap;
+		color: $tapa;
+		margin-bottom: 0;
+		font-size: 0.9em;
+	}
+}
