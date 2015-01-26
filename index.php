@@ -32,7 +32,7 @@ function load_pattern($filename) {
 		<!-- <link rel="stylesheet" href="assets/css/custom/your-styles-here.css"> -->
 
 		<!-- Pattern Library Loader base theme - DON'T REMOVE THIS! -->
-		<link rel="stylesheet" href="assets/css/pattern-library.css">
+		<link rel="stylesheet" href="assets/css/pattern-library.min.css">
 
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script>window.jQuery || document.write('<script src="assets/js/jquery-1.10.2.min.js"><\/script>')</script>

@@ -37,7 +37,9 @@ $max-width: 		1600px;
 }
 
 #patternContainer {
-	max-width: $max-width;
+	// Setting a max width here seems to cause
+	// problems with a lot of patterns.
+	// max-width: $max-width;
 	overflow: hidden;
 	margin: 0 auto;
 	padding: 6em 0;
@@ -182,10 +184,10 @@ $max-width: 		1600px;
 }
 
 @media screen and (max-width: $max-width) {
-	#patternContainer {
-		padding-left: 1.5em;
-		padding-right: 1.5em;
-	}
+	// #patternContainer {
+	// 	padding-left: 1.5em;
+	// 	padding-right: 1.5em;
+	// }
 }
 
 // code drawer
