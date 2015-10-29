@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 pattern=$1
-path_scss='assets/scss/patterns'
-path_coffee='assets/coffee'
-path_html='patterns'
+path_scss='public/assets/scss/patterns'
+path_coffee='public/assets/coffee'
+path_html='public/patterns'
 
 scss_file="${path_scss}/_${pattern}.scss"
 mkdir -p $path_scss
