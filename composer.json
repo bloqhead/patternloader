@@ -1,0 +1,17 @@
+{
+  "name": "pattern-loader",
+  "require": {
+    "mustache/mustache": "^2.8",
+    "michelf/php-markdown": "^1.5"
+  },
+  "authors": [
+    {
+      "name": "Daryn St. Pierre",
+      "email": "daryn@bigseadesign.com"
+    },
+    {
+      "name": "James Sylvanus",
+      "email": "james@bigseadesign.com"
+    }
+  ]
+}

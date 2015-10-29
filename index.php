@@ -1,21 +1,40 @@
 <?php
-function load_pattern($filename) {
-	$data = file($filename);
-	$regex = '/^<!-- @([a-zA-Z0-9-_]+)(\s(.+))? -->$/';
 
-	$vars = [];
-	for( $i = 0; $i < count( $data ); $i++ ) {
-		$result = preg_match_all( $regex, $data[$i], $matches );
-		if ($result > 0) {
-			$test = $vars[$matches[1][0]] = $matches[3][0];
-			if (empty($test)) $vars[$matches[1][0]] = true;
-			unset($data[$i]);
-		}
-	}
-	$data = implode('', $data);
+require "vendor/autoload.php";
 
-	return array( $data, $vars );
+use Michelf\Markdown;
+
+/**
+ * Loads up a pattern and parses out any "@varname value" comments, removing those lines.
+ *
+ * @param  string $filename
+ * @access public
+ * @return void
+ */
+function load_pattern($filename)
+{
+    $data = array();
+    $file_contents = file_get_contents($filename);
+    $mustache = new Mustache_Engine;
+    $datafile = dirname($filename) . '/' . basename($filename, '.mustache') . '.json';
+    if (file_exists($datafile)) {
+        // TODO: Multiple data files
+        $datacontents = file_get_contents($datafile);
+        $data = json_decode(file_get_contents($datafile));
+        if (is_array($data)) {
+            $rendered = array();
+            foreach ($data as $item) {
+                $rendered[] = $mustache->render($file_contents, $item);
+            }
+        }
+    }
+    if (!isset($rendered)) {
+        $rendered = $mustache->render($file_contents, $data);
+    }
+
+    return array( $file_contents, $data, $rendered );
 }
+
 ?><!doctype html>
 <html>
 	<head>
@@ -26,31 +45,31 @@ function load_pattern($filename) {
 		<title>Design Pattern Loader</title>
 
 		<!-- Highlight.js theme -->
-		<link rel="stylesheet" href="assets/css/highlight/monoblue.css">
+		<link rel="stylesheet" href="system/css/highlight.css">
 
-		<!-- Add your custom stylesheet(s) below -->
-		<!-- <link rel="stylesheet" href="assets/css/custom/your-styles-here.css"> -->
+		<!-- Custom app styles -->
+		<link rel="stylesheet" href="assets/css/app/styles.css">
 
 		<!-- Pattern Library Loader base theme - DON'T REMOVE THIS! -->
-		<link rel="stylesheet" href="assets/css/pattern-library.min.css">
+		<link rel="stylesheet" href="system/css/pattern-library.css">
 
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script>window.jQuery || document.write('<script src="assets/js/jquery-1.10.2.min.js"><\/script>')</script>
 		<script type="text/javascript" src="assets/js/highlight.pack.js"></script>
 	</head>
-	<body id="patternLib" class="bigsea">
+	<body id="patternLib">
 
-		<?php
-		/**
-		 * Project Info
-		 *
-		 * Change this based on your project details.
-		 * This is a cosmetic thing to customize on
-		 * a per-project basis.
-		 */
-		$json = json_decode( file_get_contents( 'project.json' ), true );
-		$patterns = glob( 'patterns/*.html' );
-		?>
+    <?php
+    /**
+     * Project Info
+     *
+     * Change this based on your project details.
+     * This is a cosmetic thing to customize on
+     * a per-project basis.
+     */
+    $json = json_decode(file_get_contents('project.json'), true);
+    $patterns = glob('patterns/*.mustache');
+    ?>
 
 		<div id="patternContainer">
 
@@ -58,61 +77,77 @@ function load_pattern($filename) {
 			<header>
 				<div class="inner">
 					<h1>
-						Pattern Library<?php if( !empty( $json['name'] ) ) { echo ' for ' . $json['name']; }; ?>
-						<?php if( !empty( $json['website'] ) ) : ?>
+						Pattern Library<?php if (!empty($json['name'])) {
+                            echo ' for ' . $json['name'];
+}; ?>
+        <?php if (!empty($json['website'])) : ?>
 							&mdash; <a href="<?php echo $json['website']; ?>">View website</a>
-						<?php endif; ?>
+        <?php
+endif; ?>
 					</h1>
 					<div class="controls">
 						<select class="pattern-jump-nav">
-							<?php foreach ( $patterns as $filename ) :
-								$anchor = str_replace( '.html', '', strtolower( str_replace( 'patterns/', '', $filename ) ) );
-							?>
+        <?php foreach ($patterns as $filename) :
+            $anchor = str_replace('.mustache', '', strtolower(str_replace('patterns/', '', $filename)));
+        ?>
 							<option value="<?= $anchor ?>"><?= $anchor ?></option>
-							<?php endforeach; ?>
+        <?php
+endforeach; ?>
 						</select>
 					</div>
 				</div>
 			</header>
 
-			<?php
-			/**
-			 * Pattern Loader
-			 *
-			 * This will automatically load in any
-			 * patterns that are dumped into the
-			 * /patterns/ directory.
-			 */
-			foreach ( $patterns as $filename ) {
-				list( $contents, $vars ) = load_pattern( $filename );
-				$id = str_replace( 'patterns/', '', $filename );
-				$anchor = str_replace( '.html', '', strtolower( $id ) );
-				?>
-				<div class="patternWrap" id="<?php echo $anchor; ?>">
+    <?php
+    /**
+     * Pattern Loader
+     *
+     * This will automatically load in any
+     * patterns that are dumped into the
+     * /patterns/ directory.
+     */
+    foreach ($patterns as $filename) {
+        list( $contents, $vars, $rendered ) = load_pattern($filename);
+        $id = str_replace('patterns/', '', $filename);
+        $anchor = str_replace('.mustache', '', strtolower($id));
+        ?>
+     <div class="patternWrap" id="<?php echo $anchor; ?>">
 					<header>
 						<a class="show-code" href="#">Toggle Code</a>
 						<h2><a href="<?php echo '#' . $anchor; ?>"><?php echo '#' . $anchor; ?></a> &mdash; <code><?php echo $id; ?></code></h2>
 					</header>
 					<div class="codeDrawer">
-						<pre><code><?php echo htmlspecialchars( $contents ); ?></code></pre>
+						<pre><code><?php echo htmlspecialchars($contents); ?></code></pre>
 					</div>
+        <?php if (!is_array($rendered)) {
+            $rendered = array($rendered);
+} ?>
+        <?php foreach ($rendered as $render) : ?>
 					<div class="patternItem">
-						<?php echo $contents; ?>
+        <?php
+        // output the contents
+        echo $render;
+        ?>
 					</div>
+        <?php
+endforeach; ?>
 
-					<?php
-					// load up the notes file for the pattern if it exists
-					$docfile = 'patterns/' . $anchor . '.txt';
-					if ( file_exists( $docfile ) ) {
-						$docs = file_get_contents( $docfile ); ?>
-					<div class="patternDocs">
-						<h3>Notes on this pattern:</h3>
-						<p><?= htmlspecialchars( $docs ); ?></p>
-					</div>
-					<?php } // docfile exists?>
+        <?php
+        // load up the notes file for the pattern if it exists
+        $docfile = 'patterns/' . $anchor . '.md';
+        if (file_exists($docfile)) {
+            $docs = file_get_contents($docfile);
+            $processed = Markdown::defaultTransform($docs); ?>
+        <div class="patternDocs">
+         <h3>Notes on this pattern:</h3>
+            <?= $processed ?>
+        </div>
+        <?php
+        } // docfile exists?>
 
-				</div>
-			<?php } ?>
+     </div>
+    <?php
+    } ?>
 
 		</div>
 
@@ -146,6 +181,8 @@ function load_pattern($filename) {
 
 		});
 		</script>
+
+		<script src="system/js/build.js"></script>
 
 	</body>
 </html>

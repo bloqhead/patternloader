@@ -1,0 +1,18 @@
+{
+  "headings": [
+    { "item": "Heading One" },
+    { "item": "Heading Two" },
+    { "item": "Heading Three" },
+    { "item": "Heading Four" }
+  ],
+  "rows": [
+    {
+      "cells": [
+        { "cell": "Table Cell One" },
+        { "cell": "Table Cell Two" },
+        { "cell": "Table Cell Three" },
+        { "cell": "Table Cell Four" }
+      ]
+    }
+  ]
+}

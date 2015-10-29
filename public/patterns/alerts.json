@@ -1,0 +1,6 @@
+[
+  { "variant": "alert-success", "title": "Success" },
+  { "variant": "alert-info", "title": "Info" },
+  { "variant": "alert-warning", "title": "Warning" },
+  { "variant": "alert-danger", "title": "Danger" }
+]
