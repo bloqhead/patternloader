@@ -48,14 +48,14 @@ function load_pattern($filename)
 		<link rel="stylesheet" href="system/css/highlight.css">
 
 		<!-- Custom app styles -->
-		<link rel="stylesheet" href="assets/css/app/styles.css">
+		<link rel="stylesheet" href="public/assets/css/styles.css">
 
 		<!-- Pattern Library Loader base theme - DON'T REMOVE THIS! -->
 		<link rel="stylesheet" href="system/css/pattern-library.css">
 
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-		<script>window.jQuery || document.write('<script src="assets/js/jquery-1.10.2.min.js"><\/script>')</script>
-		<script type="text/javascript" src="assets/js/highlight.pack.js"></script>
+		<script>window.jQuery || document.write('<script src="system/assets/js/jquery-1.10.2.min.js"><\/script>')</script>
+		<script type="text/javascript" src="system/js/highlight.pack.js"></script>
 	</head>
 	<body id="patternLib">
 
@@ -68,7 +68,7 @@ function load_pattern($filename)
      * a per-project basis.
      */
     $json = json_decode(file_get_contents('project.json'), true);
-    $patterns = glob('patterns/*.mustache');
+    $patterns = glob('public/patterns/*.mustache');
     ?>
 
 		<div id="patternContainer">
@@ -108,7 +108,7 @@ endforeach; ?>
      */
     foreach ($patterns as $filename) {
         list( $contents, $vars, $rendered ) = load_pattern($filename);
-        $id = str_replace('patterns/', '', $filename);
+        $id = str_replace('public/patterns/', '', $filename);
         $anchor = str_replace('.mustache', '', strtolower($id));
         ?>
      <div class="patternWrap" id="<?php echo $anchor; ?>">
@@ -134,7 +134,7 @@ endforeach; ?>
 
         <?php
         // load up the notes file for the pattern if it exists
-        $docfile = 'patterns/' . $anchor . '.md';
+        $docfile = 'public/patterns/' . $anchor . '.md';
         if (file_exists($docfile)) {
             $docs = file_get_contents($docfile);
             $processed = Markdown::defaultTransform($docs); ?>
@@ -182,7 +182,8 @@ endforeach; ?>
 		});
 		</script>
 
-		<script src="system/js/build.js"></script>
+        <!-- Your custom scripts -->
+		<script src="public/assets/js/build.js"></script>
 
 	</body>
 </html>

@@ -7,10 +7,7 @@ A simple PHP-driven design pattern library loader. Read about it on the [Big Sea
 3. To automate things and save time, James wrote a Bash script that will generate your pattern HTML files based on the names of your Scss files. Run `genpattern` via Terminal to do the job:<br/>
 `$ ./genpattern`
 4. Start writing your design pattern HTML in the files generated in step 3
-3. To display your patterns, open `index.php` in your web browser
-
-## Personalize
-We use this for our projects, thus we've styled it a bit to match our own company colors. If you would rather have the default styles, simply remove the `bigsea` class from the body in `index.php`.
+3. To display your patterns, open `index.php` in your web browser.
 
 ---
 
