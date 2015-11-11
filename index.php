@@ -37,27 +37,27 @@ function load_pattern($filename)
 
 ?><!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="description" content="A design pattern library experiment.">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="A design pattern library experiment.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>Design Pattern Loader</title>
+    <title>Design Pattern Loader</title>
 
-		<!-- Highlight.js theme -->
-		<link rel="stylesheet" href="system/css/highlight.css">
+    <!-- Highlight.js theme -->
+    <link rel="stylesheet" href="system/css/highlight.css">
 
-		<!-- Custom app styles -->
-		<link rel="stylesheet" href="public/assets/css/styles.css">
+    <!-- Custom app styles -->
+    <link rel="stylesheet" href="public/assets/css/styles.css">
 
-		<!-- Pattern Library Loader base theme - DON'T REMOVE THIS! -->
-		<link rel="stylesheet" href="system/css/pattern-library.css">
+    <!-- Pattern Library Loader base theme - DON'T REMOVE THIS! -->
+    <link rel="stylesheet" href="system/css/pattern-library.css">
 
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-		<script>window.jQuery || document.write('<script src="system/assets/js/jquery-1.10.2.min.js"><\/script>')</script>
-		<script type="text/javascript" src="system/js/highlight.pack.js"></script>
-	</head>
-	<body id="patternLib">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="system/assets/js/jquery-1.10.2.min.js"><\/script>')</script>
+    <script type="text/javascript" src="system/js/highlight.pack.js"></script>
+  </head>
+  <body id="patternLib">
 
     <?php
     /**
@@ -71,32 +71,29 @@ function load_pattern($filename)
     $patterns = glob('public/patterns/*.mustache');
     ?>
 
-		<div id="patternContainer">
+    <div id="patternContainer">
+      <header>
+        <div class="inner">
 
+          <h1>
+            Pattern Library<?php if (!empty($json['name'])) { echo ' for ' . $json['name']; }; ?>
+          <?php if (!empty($json['website'])) : ?>
+              &mdash; <a href="<?php echo $json['website']; ?>">View website</a>
+          <?php endif; ?>
+          </h1>
 
-			<header>
-				<div class="inner">
-					<h1>
-						Pattern Library<?php if (!empty($json['name'])) {
-                            echo ' for ' . $json['name'];
-}; ?>
-        <?php if (!empty($json['website'])) : ?>
-							&mdash; <a href="<?php echo $json['website']; ?>">View website</a>
-        <?php
-endif; ?>
-					</h1>
-					<div class="controls">
-						<select class="pattern-jump-nav">
+          <div class="controls">
+            <select class="pattern-jump-nav">
         <?php foreach ($patterns as $filename) :
-            $anchor = str_replace('.mustache', '', strtolower(str_replace('patterns/', '', $filename)));
+            $anchor = str_replace('.mustache', '', strtolower(str_replace('public/patterns/', '', $filename)));
         ?>
-							<option value="<?= $anchor ?>"><?= $anchor ?></option>
-        <?php
-endforeach; ?>
-						</select>
-					</div>
-				</div>
-			</header>
+              <option value="<?= $anchor ?>"><?= $anchor ?></option>
+        <?php endforeach; ?>
+            </select>
+          </div>
+
+        </div>
+      </header>
 
     <?php
     /**
@@ -112,25 +109,24 @@ endforeach; ?>
         $anchor = str_replace('.mustache', '', strtolower($id));
         ?>
      <div class="patternWrap" id="<?php echo $anchor; ?>">
-					<header>
-						<a class="show-code" href="#">Toggle Code</a>
-						<h2><a href="<?php echo '#' . $anchor; ?>"><?php echo '#' . $anchor; ?></a> &mdash; <code><?php echo $id; ?></code></h2>
-					</header>
-					<div class="codeDrawer">
-						<pre><code><?php echo htmlspecialchars($contents); ?></code></pre>
-					</div>
+          <header>
+            <a class="show-code" href="#">Toggle Code</a>
+            <h2><a href="<?php echo '#' . $anchor; ?>"><?php echo '#' . $anchor; ?></a> &mdash; <code><?php echo $id; ?></code></h2>
+          </header>
+          <div class="codeDrawer">
+            <pre><code><?php echo htmlspecialchars($contents); ?></code></pre>
+          </div>
         <?php if (!is_array($rendered)) {
             $rendered = array($rendered);
 } ?>
         <?php foreach ($rendered as $render) : ?>
-					<div class="patternItem">
+          <div class="patternItem">
         <?php
         // output the contents
         echo $render;
         ?>
-					</div>
-        <?php
-endforeach; ?>
+          </div>
+        <?php endforeach; ?>
 
         <?php
         // load up the notes file for the pattern if it exists
@@ -149,41 +145,39 @@ endforeach; ?>
     <?php
     } ?>
 
-		</div>
+    </div>
 
-		<script type="text/javascript">
-		$( function() {
-			/**
-			 * Highlight.js
-			 */
-			$('pre code').each(
-				function( i, e ) {
-					hljs.highlightBlock(e)
-				}
-			);
+    <script type="text/javascript">
+    jQuery( function($) {
+      /**
+       * Highlight.js
+       */
+      $('pre code').each( function(i,e) {
+          hljs.highlightBlock(e);
+      });
 
-			/**
-			 * Raw toggler
-			 */
-			$('.show-code').on( 'click', function(evt) {
-				$(this).parents('.patternWrap').find('.codeDrawer').toggleClass('is_open');
-				evt.stopPropagation();
-				return false;
-			});
+      /**
+       * Raw toggler
+       */
+      $('.show-code').on( 'click', function(e) {
+        $(this).parents('.patternWrap').find('.codeDrawer').toggleClass('is_open');
+        e.stopPropagation();
+        return false;
+      });
 
-			/**
-			 * Pattern numb nav
-			 */
-			$('.pattern-jump-nav').on('change', function() {
-				var position = $('#' + $(this).val()).offset();
-				window.scroll(0, position.top);
-			});
+      /**
+       * Pattern numb nav
+       */
+      $('.pattern-jump-nav').on('change', function() {
+        var position = $( '#' + $(this).val() ).offset().top;
+        window.scroll(0, position - 60);
+      });
 
-		});
-		</script>
+    });
+    </script>
 
         <!-- Your custom scripts -->
-		<script src="public/assets/js/build.js"></script>
+    <script src="public/assets/js/build.js"></script>
 
-	</body>
+  </body>
 </html>
