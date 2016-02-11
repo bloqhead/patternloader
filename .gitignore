@@ -3,3 +3,4 @@
 *.proj
 /node_modules/
 .sass-cache/
+/vendor/mustache

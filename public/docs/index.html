@@ -54,22 +54,23 @@
 			 * Automagically builds a <select> jump menu for
 			 * choosing which documentation block to navigate to.
 			 */
-			function sectionSelector() {
-				var $h, $s, $i, $n, $o, $j;
+			var sectionSelector;
+			sectionSelector = function() {
+				var $headings, $select, $headingId, $headingText, $selectVal;
 
 				$('#mdDocHeader').append('<select />');
-				$s = $('#mdDocHeader select');
-				$h = $('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]');
+				$select = $('#mdDocHeader select');
+				$headings = $('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]');
 
-				$h.each( function(e) {
-					$i = $(this).attr('id');
-					$n = $(this).text();
-					$s.append('<option value="#' + $i + '">' + $n + '</option>');
+				$headings.each( function(e) {
+					$headingId = $(this).attr('id');
+					$headingText = $(this).text();
+					$select.append('<option value="#' + $headingId + '">' + $headingText + '</option>');
 				});
 
-				$s.change( function(e) {
-					$o = $(this).find(':selected').val();
-					window.location.hash = $o;
+				$select.change( function(e) {
+					$selectVal = $(this).find(':selected').val();
+					window.location.hash = $selectVal;
 				});
 			}
 			sectionSelector();

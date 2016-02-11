@@ -56,7 +56,9 @@ module.exports = function(grunt) {
           expand : true,
           flatten : true,
           cwd : 'public/assets/coffee',
-          src : [ '**/*.coffee' ],
+          src : [
+          	'**/*.coffee'
+          ],
           dest : 'public/assets/js',
           ext : '.js'
         } ]
@@ -71,9 +73,7 @@ module.exports = function(grunt) {
 			dist : {
 				files : {
 					'public/assets/js/build.js' : [
-						'public/assets/js/**/*',
-						'!public/assets/js/highlight.pack.js',
-						'!public/assets/js/jquery*.js'
+						'public/assets/js/**/*.js'
 					]
 				}
 			}
