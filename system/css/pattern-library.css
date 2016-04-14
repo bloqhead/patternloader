@@ -16,7 +16,6 @@
 }
 
 #patternContainer {
-  overflow: hidden;
   margin: 0 auto;
   padding: 6em 0;
 }
@@ -62,14 +61,35 @@
   cursor: pointer;
 }
 
+/* clearfixin' */
+#patternContainer:before,
+#patternContainer:after,
+.patternItem:before,
+.patternItem:after,
+.patternWrap:before,
+.patternWrap:after {
+  content: " ";
+  display: table;
+}
+
+#patternContainer:after,
+.patternItem:after,
+.patternWrap:after {
+  clear: both;
+}
+
+#patternContainer,
 .patternItem,
+.patternWrap {
+  *zoom: 1;
+}
+
 .patternWrap pre {
   overflow: hidden;
   display: block;
 }
 
 .patternWrap {
-  overflow: hidden;
   padding: 2em 0;
 }
 
@@ -115,6 +135,8 @@
 .patternItem,
 .patternWrap pre {
   transition: .2s all ease-in-out;
+  width: 100%;
+  float: none;
 }
 
 .patternWrap pre {
@@ -127,21 +149,11 @@
   width: 0;
 }
 
-.patternItem {
-  overflow: hidden;
-}
-
 @media screen and (max-width: 1600px) {
   #patternContainer {
     padding-left: 1.5em;
     padding-right: 1.5em;
   }
-}
-
-.patternItem,
-.patternWrap pre {
-  width: 100%;
-  float: none;
 }
 
 #patternContainer > header .controls,
