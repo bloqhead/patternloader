@@ -1,4 +1,6 @@
 # Pattern Loader
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/bloqhead/patternloader.svg)](https://greenkeeper.io/)
 A simple PHP-driven design pattern library loader. Read about it on the [Big Sea Blog](http://bigseadesign.com/web-design/following-patterns).
 
 ## Get Started
